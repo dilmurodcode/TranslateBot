@@ -20,6 +20,7 @@ translator_uz_to_ru = GoogleTranslator(source='uz', target='ru')
 translator_en_to_ru = GoogleTranslator(source='en', target='ru')
 translator_ru_to_en = GoogleTranslator(source='ru', target='en')
 
+
 def detect_language(text):
     from googletrans import Translator
     translator = Translator()
@@ -46,7 +47,7 @@ async def translate_message(message: Message):
 <b>Ingilizchasi:</b> <i>{translated_en}</i>
 <b>Ruscha:</b> <i>{translated_ru}</i>
 
-tarnslated by @dilmorodcode
+tarnslated by @dilmurodcode
                         """
             await message.answer(text)
 
@@ -57,7 +58,7 @@ tarnslated by @dilmorodcode
 <b>O'zbekcha:</b> <i>{translated_uz}</i>
 <b>Ruscha:</b> <i>{translated_ru}</i>
 
-tarnslated by @dilmorodcode
+tarnslated by @dilmurodcode
             """
             await message.answer(text)
 
@@ -65,10 +66,10 @@ tarnslated by @dilmorodcode
             translated_uz = translator_ru_to_uz.translate(text)
             translated_en = translator_ru_to_en.translate(text)
             text = f'''
-<b>O'zbekcha:<\b> <i>{translated_uz}</i>
-<b>Ingilizcha:<\b> <i>{translated_en}</i>
+<b>O'zbekcha:</b> <i>{translated_uz}</i>
+<b>Ingilizcha:</b> <i>{translated_en}</i>
 
-tarnslated by @dilmorodcode            
+tarnslated by @dilmurodcode            
 '''
             await message.answer(text)
         else:
