@@ -6,7 +6,7 @@ from aiogram.types import Message
 from deep_translator import GoogleTranslator
 
 from bot.keyboards.admin import keyboards
-from mativatsion_fikrlar import get_random_sentence
+from bot.mativatsion_fikrlar import get_random_sentence
 
 router = Router()
 

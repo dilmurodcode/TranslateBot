@@ -4,3 +4,8 @@
 .idea/
 __pycache__/
 *.pyc
+sqlite.db
+*.db
+.db
+.sql
+**.sql
