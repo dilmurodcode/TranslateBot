@@ -42,7 +42,7 @@ async def send_users_page(message: Message, users, page: int):
     if message.reply_to_message:
         await message.reply_to_message.edit_text(text, reply_markup=keyboard)
     else:
-        await message.answer(text, reply_markup=keyboard)
+        await message.edit_text(text, reply_markup=keyboard)
 
 
 @router.callback_query()
