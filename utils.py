@@ -24,6 +24,16 @@ def get_users():
     return None
 
 
+def user_id_is_accessible(user_id: int) -> bool:
+    try:
+        InlineKeyboardButton(text="Test", url=f"tg://user?id={user_id}")
+        return True
+    except TelegramBadRequest:
+        return False
+
+
+sync
+
 
 def send_users_page(page: int = 0):
     users = get_users()
@@ -33,12 +43,20 @@ def send_users_page(page: int = 0):
     end = start + per_page
     page_users = users[start:end]
 
-    text = f"Ummumiy soni: {len(users)}\n\n"
+    text = f"Umumiy soni: {len(users)}\n\n"
 
-    buttons = [
-        [InlineKeyboardButton(text=user[2] or 'yo‘q', url=f"tg://user?id={user[1]}")]
-        for user in page_users
-    ]
+    buttons = []
+
+    for user in page_users:
+        user_name = user[2] or 'yo‘q'
+        user_id = user[1]
+
+        if user_id_is_accessible(user_id):
+            button = InlineKeyboardButton(text=user_name, url=f"tg://user?id={user_id}")
+        else:
+            button = InlineKeyboardButton(text=f"{user_name} (Mavjud emas)", callback_data="none")
+
+        buttons.append([button])
 
     nav_buttons = []
     if page > 0:
@@ -54,4 +72,4 @@ def send_users_page(page: int = 0):
 
     keyboard = InlineKeyboardMarkup(inline_keyboard=buttons)
 
-    return  text, keyboard
+    return text, keyboard
