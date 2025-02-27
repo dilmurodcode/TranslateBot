@@ -42,6 +42,8 @@ async def send_users_page(bot, page: int = 0):
     page_users = users[start:end]
 
     text = f"Umumiy soni: {len(users)}\n\n"
+    count = await bot.get_chat_members_count()
+    text += f"Jami start bosganlar: {count}"
 
     buttons = []
 
