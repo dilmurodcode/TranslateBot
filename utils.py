@@ -24,16 +24,7 @@ def get_users():
     return None
 
 
-def user_id_is_accessible(user_id: int) -> bool:
-    try:
-        InlineKeyboardButton(text="Test", url=f"tg://user?id={user_id}")
-        return True
-    except TelegramBadRequest:
-        return False
-
-
-
-def send_users_page(page: int = 0):
+async def send_users_page(bot, page: int = 0):
     users = get_users()
     per_page = 10
     total_pages = (len(users) + per_page - 1) // per_page
@@ -49,9 +40,10 @@ def send_users_page(page: int = 0):
         user_name = user[2] or 'yo‘q'
         user_id = user[1]
 
-        if user_id_is_accessible(user_id):
+        try:
+            await bot.get_chat(user_id)
             button = InlineKeyboardButton(text=user_name, url=f"tg://user?id={user_id}")
-        else:
+        except:
             button = InlineKeyboardButton(text=f"{user_name} (Mavjud emas)", callback_data="none")
 
         buttons.append([button])
