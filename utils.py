@@ -46,7 +46,8 @@ async def send_users_page(bot, page: int = 0):
         except:
             button = InlineKeyboardButton(text=f"{user_name} (Mavjud emas)", callback_data="none")
 
-        buttons.append([button])
+        if button.callback_data != "none":
+            buttons.append([button])
 
     nav_buttons = []
     if page > 0:
