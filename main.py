@@ -13,7 +13,7 @@ router.include_router(admin_router)
 
 
 async def main():
-    TOKEN = "8101475312:AAFJt-Ys47EZ29cbMW8C8_NGrODjleafbuo"
+    TOKEN = "7633655282:AAHLGzqYV7N2qiRt_7qlBsT6vWZ5F4MQdPw"
     bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode='HTML'))
     dp = Dispatcher()
     dp.include_router(router)
