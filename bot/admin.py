@@ -10,12 +10,12 @@ router = Router()
 async def handler(message: Message):
     user_id = message.from_user.id
     if str(user_id) in ["7832158819", "8016755758", '5593831038']:
-        text, keyboard = send_users_page(message.bot)
+        text, keyboard = await send_users_page(message.bot)
         await message.answer(text, reply_markup=keyboard)
 
 
 @router.callback_query(F.data.startswith("users:"))
 async def pagination(c: CallbackQuery):
     page = int(c.data.split(":")[1])
-    text, keyboard = send_users_page(c.bot, page)
+    text, keyboard = await send_users_page(c.bot, page)
     await c.message.edit_text(text, reply_markup=keyboard)
