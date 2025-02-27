@@ -18,4 +18,7 @@ async def handler(message: Message):
 async def pagination(c: CallbackQuery):
     page = int(c.data.split(":")[1])
     text, keyboard = await send_users_page(c.bot, page)
-    await c.message.edit_text(text, reply_markup=keyboard)
+    try:
+        await c.message.edit_text(text, reply_markup=keyboard)
+    except Exception as error:
+        await c.answer(text=str(error))
