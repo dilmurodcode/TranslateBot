@@ -41,8 +41,8 @@ async def send_users_page(bot, page: int = 0):
         user_id = user[1]
 
         try:
-            print(await bot.get_chat(user_id))
-            button = InlineKeyboardButton(text=user_name, url=f"tg://user?id={user_id}")
+            user = await bot.get_chat(user_id)
+            button = InlineKeyboardButton(text=user_name, url=f"tg://user?id={user.id}")
         except:
             button = InlineKeyboardButton(text=f"{user_name} (Mavjud emas)", callback_data="none")
 
