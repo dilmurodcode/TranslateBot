@@ -32,8 +32,6 @@ def user_id_is_accessible(user_id: int) -> bool:
         return False
 
 
-sync
-
 
 def send_users_page(page: int = 0):
     users = get_users()
