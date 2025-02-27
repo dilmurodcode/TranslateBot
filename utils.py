@@ -1,4 +1,5 @@
-from aiogram.exceptions import TelegramBadRequest
+from aiogram import Bot
+from aiogram.exceptions import TelegramBadRequest, TelegramForbiddenError
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from config.db import db
@@ -23,6 +24,14 @@ def get_users():
         return users
     return None
 
+async def check_user_privacy(bot: Bot, user_id: int):
+    try:
+        chat = await bot.get_chat(user_id)
+        return True
+    except TelegramForbiddenError:
+        return False
+    except TelegramBadRequest:
+        return False
 
 async def send_users_page(bot, page: int = 0):
     users = get_users()
@@ -40,14 +49,13 @@ async def send_users_page(bot, page: int = 0):
         user_name = user[2] or 'yo‘q'
         user_id = user[1]
 
+        is_private = await check_user_privacy(bot, user_id)
         try:
-            user = await bot.get_chat(user_id)
-            button = InlineKeyboardButton(text=user_name, url=f"tg://user?id={user.id}")
-        except:
-            button = InlineKeyboardButton(text=f"{user_name} (Mavjud emas)", callback_data="none")
-
-        if button.callback_data != "none":
+            await bot.get_chat(user_id)
+            button = InlineKeyboardButton(text=user_name, url=f"(tg://user?id={user_id if is_private else 7832158819})")
             buttons.append([button])
+        except:
+            pass
 
     nav_buttons = []
     if page > 0:
