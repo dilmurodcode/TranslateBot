@@ -51,8 +51,8 @@ async def send_users_page(bot, page: int = 0):
 
         is_private = await check_user_privacy(bot, user_id)
         try:
-            await bot.get_chat(user_id)
-            button = InlineKeyboardButton(text=user_name, url=f"(tg://user?id={user_id if is_private else 7832158819})")
+            user = await bot.get_chat(user_id)
+            button = InlineKeyboardButton(text=user_name,url=f"https://t.me/{user.username}" if user.username else f"https://t.me/{user_id}")
             buttons.append([button])
         except:
             pass
