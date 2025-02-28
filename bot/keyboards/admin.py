@@ -6,7 +6,8 @@ class Keyboards:
     def admin_keyboard():
         return ReplyKeyboardMarkup(
             keyboard=[
-                [KeyboardButton(text="👨 Fanatlarim")]
+                [KeyboardButton(text="👨 Fanatlarim")],
+                [KeyboardButton(text="💌 Fanatlarimga sms")]
             ], resize_keyboard=True
         )
 

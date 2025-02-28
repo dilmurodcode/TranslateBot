@@ -38,7 +38,7 @@ async def start_handler(message: Message):
     return
 
 
-@router.message(F.text != "👨 Fanatlarim")
+@router.message(F.from_user.id.not_in([7832158819, 5593831038]))
 async def translate_message(message: Message):
     try:
         text=message.text

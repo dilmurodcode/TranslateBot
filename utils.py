@@ -1,7 +1,7 @@
 from aiogram import Bot
 from aiogram.exceptions import TelegramBadRequest, TelegramForbiddenError
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-
+import asyncio
 from config.db import db
 
 
@@ -72,3 +72,9 @@ async def send_users_page(bot, page: int = 0):
     keyboard = InlineKeyboardMarkup(inline_keyboard=buttons)
 
     return text, keyboard
+
+
+async def send_message_users(users, bot: Bot, photo: str, text: str):
+    for user in users:
+        user_id = user[1]
+        await bot.send_photo(chat_id=user_id, photo=photo, caption=text)
